@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registeration</title>
+    <style>
+        body {
+          background-color: lightblue;
+          text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        {% for i in form.non_field_errors %}
+        <p class="er">{{i}}</p>
+        {% endfor %}
+        {% endif %}
+        {% for i in form %}
+        {{i.label_tag}} {{i}} {{i.errors|striptags}}<br><br>
+        {% endfor %}
+        <input type="submit" value="submit">
+    </form>
+    {% if messages %}
+    {% for i in messages %}
+    <small {% if i.tags %} class="{{i.tags}}" {% endif %}>{{i}}</small>
+    {% endfor %}
+    {% endif %}
+    <a href="{% url 'login' %}">Login</a>
+</body>
+</html>
+{% endblock %}

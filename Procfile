@@ -1,0 +1,1 @@
+web: gunicorn ojas_blogger.wsgi
